@@ -13,8 +13,6 @@
 - CÅAC++
 - DirectX11
 - XAudio2
-- ImGui
-- yaml-cpp
 - Visual Studio 2022
 
 

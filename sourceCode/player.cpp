@@ -18,7 +18,7 @@
 static Player g_Player;
 static Bullet g_MakingBullet;
 static Controller g_Controller;
-static WiimoteManager* g_wiiMoteManager = nullptr;
+static WiimoteManager* g_WiiMoteManager = nullptr;
 
 static 	XMFLOAT2 g_AimingRange;
 static unsigned int g_AimingRangeRotationSpeed = 1;
@@ -145,9 +145,9 @@ void InitializePlayer()
 
 
 	/* Wiimote‰Šú‰» */
-	g_wiiMoteManager = new WiimoteManager;
+	g_WiiMoteManager = new WiimoteManager;
 
-	g_wiiMoteManager->onConnection([](Wiimote* wiimote) {
+	g_WiiMoteManager->onConnection([](Wiimote* wiimote) {
 
 		wiimote->onButton([wiimote](WiimoteButton button, bool down) {
 			const char* buttonName = WiimoteButtons::toString(button);
@@ -188,18 +188,18 @@ void InitializePlayer()
 		wiimote->start(WiimoteFeatures::Buttons | WiimoteFeatures::Accelerometer | WiimoteFeatures::Extension);
 		});
 
-	g_wiiMoteManager->onDisconnection([](Wiimote* wiimote) {
+	g_WiiMoteManager->onDisconnection([](Wiimote* wiimote) {
 		wiimote->clearEvents();
 		});
 
-	g_wiiMoteManager->continuousScan();
+	g_WiiMoteManager->continuousScan();
 }
 
 void FinalizePlayer()
 {
 	//g_Player.SetWiiRanble(false);
 
-	delete g_wiiMoteManager;
+	delete g_WiiMoteManager;
 
 	StopSound(g_ExplodedSE);
 	StopSound(g_DamageSE);
@@ -214,7 +214,7 @@ void FinalizePlayer()
 
 void UpdatePlayer(EnemyProduct* enemyProduct)
 {
-	g_wiiMoteManager->update();
+	g_WiiMoteManager->update();
 
 	//for (Wiimote* wiimote : m->connected()) {
 	//	wiimote->setRumble(g_Player.GetWiiRanble());
